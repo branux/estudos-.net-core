@@ -1,0 +1,10 @@
+** Criar app Web sem template
+
+1. Criar a pasta e acessá-la
+2. No terminal digitar dotnet new
+3. Adicionar o Kestrel como dependência no project.json
+4. Pedir a restauração de pacotes: dotnet restore
+5. Adicionar o arquivo Startup.cs e configurar a requisição (cuidado com o namespace)
+6. Atualizar o Program.cs para iniciar o WebHostBuilder
+5. Rodar a aplicação: dotnet run
+6. Acessar a url com sua devida porta informada pelo kestrel
