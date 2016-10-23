@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>eda2fa38-afaf-4ff9-8ece-0c1e21c8bdf1</ProjectGuid>
-    <RootNamespace>OdeToFood</RootNamespace>
+    <ProjectGuid>fe7b9e2f-a40c-4dd1-8020-18be3fec9023</ProjectGuid>
+    <RootNamespace>UsingAppSettings</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
