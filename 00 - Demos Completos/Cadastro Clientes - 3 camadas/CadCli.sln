@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CadCli.API", "CadCli.API\CadCli.API.xproj", "{2E85AFE8-FF62-4DBD-85C0-83ED5BA9F3A8}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CadCli.Data", "CadCli.Data\CadCli.Data.xproj", "{8D2F9EE3-0DC4-42EB-9E3A-5B7B983F51BF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CadCli.Domain", "CadCli.Domain\CadCli.Domain.xproj", "{B707AAAC-BFD8-4EF7-9A2C-03599A5082B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E85AFE8-FF62-4DBD-85C0-83ED5BA9F3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E85AFE8-FF62-4DBD-85C0-83ED5BA9F3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E85AFE8-FF62-4DBD-85C0-83ED5BA9F3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E85AFE8-FF62-4DBD-85C0-83ED5BA9F3A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2F9EE3-0DC4-42EB-9E3A-5B7B983F51BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2F9EE3-0DC4-42EB-9E3A-5B7B983F51BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2F9EE3-0DC4-42EB-9E3A-5B7B983F51BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2F9EE3-0DC4-42EB-9E3A-5B7B983F51BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B707AAAC-BFD8-4EF7-9A2C-03599A5082B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B707AAAC-BFD8-4EF7-9A2C-03599A5082B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B707AAAC-BFD8-4EF7-9A2C-03599A5082B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B707AAAC-BFD8-4EF7-9A2C-03599A5082B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
