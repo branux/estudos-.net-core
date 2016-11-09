@@ -23,7 +23,10 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "TodoApp.Domain": "1.0.0-*",
     "TodoApp.Infra.CrossCutting": "1.0.0-*",
-    "TodoApp.Service": "1.0.0-*"
+    "TodoApp.Service": "1.0.0-*",
+    "Swashbuckle.SwaggerGen": "6.0.0-beta901",
+    "Swashbuckle.SwaggerUi": "6.0.0-beta901",
+    "FluentValidation": "6.2.1"
   },
 
   "tools": {
@@ -43,7 +46,9 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "xmlDoc": true,
+    "nowarn": [ "CS1591" ]
   },
 
   "runtimeOptions": {
