@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TodoApp.Infra.CrossCutting.IoC;
+using TodoApp.Api.Validators;
 
 namespace TodoApp.Api
 {
@@ -30,6 +31,7 @@ namespace TodoApp.Api
         {
             services.AddSingleton(Configuration);
             IoCConfiguration.Configure(services);
+            services.AddScoped<TodoValidator>();
             services.AddSwaggerGen();
             var pathToDoc = Configuration["Swagger:Path"];
 

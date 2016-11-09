@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using TodoApp.Domain.Services;
+using System.Net;
+using TodoApp.Api.Extensions;
+using TodoApp.Api.Validators;
 using TodoApp.Domain.Dtos;
+using TodoApp.Domain.Services;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,46 +14,136 @@ namespace TodoApp.Api.Controllers
     [Route("api/[controller]")]
     public class TodoController : Controller
     {
-        private readonly ITodoService _todoServ;
-        public TodoController(ITodoService todoServ)
+        private readonly ITodoService appService;
+        private readonly TodoValidator validator;
+
+        public TodoController(ITodoService appService, TodoValidator validator)
         {
-            this._todoServ = todoServ;
+            this.appService = appService;
+            this.validator = validator;
         }
-        
-        // GET: api/values
+
+        // GET: api/todo
         [HttpGet]
-        public IEnumerable<TodoDTO> Get()
+        public Results.GenericResult<IEnumerable<TodoDTO>> Get()
         {
-            return _todoServ.GetAll();
+            var result = new Results.GenericResult<IEnumerable<TodoDTO>>();
+
+            try
+            {
+                result.Result = appService.GetAll();
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                result.Errors = new string[] { ex.Message };
+            }
+
+            return result;
         }
 
-        // GET api/values/5
+        // GET api/todo/5
         [HttpGet("{id}")]
-        public TodoDTO Get(int id)
+        public Results.GenericResult<TodoDTO> Get(int id)
         {
-            return _todoServ.GetById(id);
+            var result = new Results.GenericResult<TodoDTO>();
+
+            try
+            {
+                result.Result = appService.GetById(id);
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                result.Errors = new string[] { ex.Message };
+            }
+
+            return result;
         }
 
-        // POST api/values
+        // POST api/todo
         [HttpPost]
-        public TodoDTO Post([FromBody]TodoDTO todo)
+        public Results.GenericResult<TodoDTO> Post([FromBody]TodoDTO model)
         {
-            return _todoServ.Create(todo);
+            var result = new Results.GenericResult<TodoDTO>();
+
+            var validatorResult = validator.Validate(model);
+            if (validatorResult.IsValid)
+            {
+                try
+                {
+                    result.Result = appService.Create(model);
+                    result.Success = true;
+                    Response.StatusCode = (int)HttpStatusCode.Created;
+                }
+                catch (Exception ex)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    result.Errors = new string[] { ex.Message };
+                }
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                result.Errors = validatorResult.GetErrors();
+            }
+
+            return result;
         }
 
-        // PUT api/values/5
+        // PUT api/todo/5
         [HttpPut("{id}")]
-        public TodoDTO Put(int id, [FromBody]TodoDTO todo)
+        public Results.GenericResult Put(int id, [FromBody]TodoDTO model)
         {
-            todo.Id = id;
-            return _todoServ.Update(todo);
+            var result = new Results.GenericResult();
+
+            var validatorResult = validator.Validate(model);
+            if (validatorResult.IsValid)
+            {
+                try
+                {
+                    result.Success = appService.Update(model) != null;
+                    if (!result.Success)
+                        throw new Exception($"Todo {id} can't be updated");
+                }
+                catch (Exception ex)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    result.Errors = new string[] { ex.Message };
+                }
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                result.Errors = validatorResult.GetErrors();
+            }
+
+
+            return result;
+
         }
 
-        // DELETE api/values/5
+        // DELETE api/todo/5
         [HttpDelete("{id}")]
-        public bool Delete(int id)
+        public Results.GenericResult Delete(int id)
         {
-            return _todoServ.Delete(id);
+            var result = new Results.GenericResult();
+
+            try
+            {
+                result.Success = appService.Delete(id);
+                if (!result.Success)
+                    throw new Exception($"Todo {id} can't be deleted");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                result.Errors = new string[] { ex.Message };
+            }
+
+            return result;
         }
     }
 }
